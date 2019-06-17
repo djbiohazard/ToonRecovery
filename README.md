@@ -8,12 +8,7 @@ At the moment, the following is implemented:
  - Loading of modified U-Boot version using JTAG
  - Logging in to supported versions of U-Boot
  - Setting up the U-Boot environment so the Toon boots into the recovery console
-
-###
-In the future it will probably provide:
-- start a auto recovery
-- set manual IP address details
-- set your own boot server IP address
+ - Set your own boot server IP address and/or the gateway IP address
 
 ## Where is the recovery environment loaded from?
 

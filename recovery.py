@@ -184,13 +184,11 @@ class Recover(object):
             if match:
                 log.info("Timeout loading from NFS server")
                 sys.exit()
+            if line == 'done':
+                break
 
-        log.debug(port.read_until("U-Boot>"))
 
         log.info("Kernel loaded into memory. Now booting from server...");
-	cmd = "bootm"
-        port.write(cmd + "\n")
-        port.flush()
 
 
     def start_recovery(self):

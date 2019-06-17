@@ -21,7 +21,7 @@ cat /proc/fs/nfsd/versions
 
 Then enable the NFS export of the NFS directory with this in the /etc/exports file. Don't forget that you need to reload the exports if you change it.
 ```
-/srv/nfs/dumps *(rw,no_subtree_check,async,no_root_squash)
+/srv/nfs *(rw,no_subtree_check,async,no_root_squash)
 ```
 
 ## How to use it?

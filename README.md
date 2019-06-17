@@ -17,9 +17,9 @@ In the future it will probably provide:
 
 ## Where is the recovery environment loaded from?
 
-The recovery will be loaded over NFS from the server which you provide (using option --serverip). You must download the NFS server image and unpack the tar.gz file into /srv/nfs. Then enable NFS on your server and enable NFS v2.
+The recovery will be loaded over NFS from the server which you provide (using option --serverip). You must download the NFS server image and unpack the tar.gz file into /srv/nfs. The image file is stored in github using LFS. If your git client doesn't support LFS download the image file manually.
 
-Check for NFS v2 with
+Then enable NFS on your server and enable NFS v2. Check for NFS v2 with
 ```
 cat /proc/fs/nfsd/versions
 ```

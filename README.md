@@ -118,7 +118,7 @@ optional arguments:
   --serial-port PATH    The path of the serial port to use. Per default it will use /dev/serial0 
   --output-level INFO|DEBUG
                         The level of output to print to the console
-  --gatewayip IP	       Set a gateway IP address if DHCP is not providing the gateway IP to your toon
+  --gatewayip IP        Set a gateway IP address if DHCP is not providing the gateway IP to your toon
   --serverip IP         Set the NFS server IP address where the recovery image is located. Default to where this script is running on.
   --jtag-available      Indicates you have a JTAG debugger connected to your
                         Toon's JTAG headers

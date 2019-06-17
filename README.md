@@ -65,7 +65,7 @@ Then reset your Toon and let the magic happen :) After it is finished you must c
 
 You should definitely get a Pi.
 
-However, if you're adamant that you want to root your Toon from another device and
+However, if you're adamant that you want to recover your Toon from another device and
 you have a JTAG debugger lying around that works with OpenOCD, you should be able to
 use this script without issue. Just put the configuration file for your debugger in the
 `assets/adapters` directory (make sure it has a `.cfg` extension) and pass the name
@@ -80,7 +80,7 @@ usage: sudo python . [-h] [--serial-port PATH]
                   [--output-level INFO|DEBUG] [--jtag-available]
                   [--dont-check-uboot] [--boot-only]
 
-Root your Toon.
+Recover your Toon.
 
 optional arguments:
   -h, --help            show this help message and exit

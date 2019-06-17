@@ -71,6 +71,29 @@ Als you need to connect the Toon to your network using the builting ethernet por
 
 Then reset your Toon and let the magic happen :) After it is finished you must connect to your toon over serial and you will see that your Toon is booted into the recovery console.
 
+## Recovery
+When the Toon is booted into the recovery environment start your favourite serial terminal emulator. You will presented a menu like this one.
+
+```
+Welcome to the Toon recovery environment.
+--> Your Toon has hostname: eneco-001-xxxxxx
+--> We have a VPN config file in the backup location
+=========================================
+1) Backup Toon VPN config
+2) Format Toon filesystem
+3) Recover Toon filesystem
+4) Restore Toon hostname and VPN config from backup
+9) Reboot Toon
+0) Drop to shell
+=========================================
+Choose an option:
+```
+The first option will mount your Toon filesystem (if possible) and make a backup of your VPN config file. This is the only thing which makes your Toon unique and necessary to have your Toon connected to the Eneco server later on (for example, for updates).
+The second option will format your Toon filesystem. Be sure you have a backup of the VPN config and agree with formatting the filesystem. You will loose every history of your Toon!
+The third option will allow you to recover your Toon from a few supplied firmware versions.
+The fourth option will recover your Toon VPN config and hostname after the recovery.
+
+
 ## But I don't have a Pi
 
 You should definitely get a Pi.

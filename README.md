@@ -17,7 +17,17 @@ In the future it will probably provide:
 
 ## Where is the recovery environment loaded from?
 
-At the moment the application will load the recovery environment from qutility.nl. This is a TSC provided server which provides the necessary files over NFS.
+The recovery will be loaded over NFS from the server which you provide (using option --serverip). You must download the NFS server image and unpack the tar.gz file into /srv/nfs. Then enable NFS on your server and enable NFS v2.
+
+Check for NFS v2 with
+```
+cat /proc/fs/nfsd/versions
+```
+
+Then enable the NFS export of the NFS directory with this in the /etc/exports file. Don't forget that you need to reload the exports if you change it.
+```
+/srv/nfs/dumps *(rw,no_subtree_check,async,no_root_squash)
+```
 
 ## How to use it?
 

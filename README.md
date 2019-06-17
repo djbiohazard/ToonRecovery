@@ -89,8 +89,11 @@ Welcome to the Toon recovery environment.
 Choose an option:
 ```
 The first option will mount your Toon filesystem (if possible) and make a backup of your VPN config file. This is the only thing which makes your Toon unique and necessary to have your Toon connected to the Eneco server later on (for example, for updates).
+
 The second option will format your Toon filesystem. Be sure you have a backup of the VPN config and agree with formatting the filesystem. You will loose every history of your Toon!
+
 The third option will allow you to recover your Toon from a few supplied firmware versions.
+
 The fourth option will recover your Toon VPN config and hostname after the recovery.
 
 

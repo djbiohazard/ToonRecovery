@@ -12,7 +12,13 @@ At the moment, the following is implemented:
 
 ## Where is the recovery environment loaded from?
 
-The recovery will be loaded over NFS from the server which you provide (using option --serverip). You must download the NFS server image and unpack the tar.gz file into /srv/nfs. The image file is stored in github using LFS. If your git client doesn't support LFS download the image file manually.
+The recovery will be loaded over NFS from the server which you provide (using option --serverip). You must download the NFS server image and unpack the tar.gz file into /srv/nfs. The image file is stored in github using LFS. However LFS (in a free plan) has limited bandwith available and blocks if too many bandwith is already used this month. So, you can also download it from the qutility.nl webserver. Just run this command to download and unpack the recovery image to your NFS directory:
+
+```
+mkdir -p /srv/nfs
+cd /srv/nfs
+curl -Nks "http://qutility.nl/toon-recovery-nfs-server-image.tar.gz" | tar zxvf -
+```
 
 Then enable NFS on your server and enable NFSv2. This is needed for the Toon uboot which only supports NFSv2. Check how to enable NFS v2 in the manuals of your linux distro. Check if NFSv2 is enabled with
 ```
@@ -107,8 +113,8 @@ I'm pretty sure Windows is not going to work though, so you should use a Linux
 ## Command line arguments
 
 ```
-usage: sudo python . [-h] [--serial-port PATH]
-                  [--output-level INFO|DEBUG] [--jtag-available]
+usage: sudo python . [-h] [--serial-port PATH] [--gatewayip IP] [--serverip IP]
+                  [--output-level INFO|DEBUG] [--jtag-available] [--jtag-hardware TYPE]
                   [--dont-check-uboot] [--boot-only]
 
 Recover your Toon.
@@ -118,8 +124,9 @@ optional arguments:
   --serial-port PATH    The path of the serial port to use. Per default it will use /dev/serial0 
   --output-level INFO|DEBUG
                         The level of output to print to the console
-  --gatewayip IP        Set a gateway IP address if DHCP is not providing the gateway IP to your toon
-  --serverip IP         Set the NFS server IP address where the recovery image is located. Default to where this script is running on.
+  --gatewayip IP        Set a gateway IP address if DHCP is not providing the gateway IP to your toon.
+  --serverip IP         Set the NFS server IP address where the recovery image is located. Defaults to
+                        where this script is running on.
   --jtag-available      Indicates you have a JTAG debugger connected to your
                         Toon's JTAG headers
   --jtag-hardware TYPE  The JTAG debugger type that we're working with. The

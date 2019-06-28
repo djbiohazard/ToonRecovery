@@ -126,7 +126,7 @@ class Recover(object):
 
         #if gatewayip_val is None:
         if gatewayip_val is None:
-            if gateway is None:
+            if gatewayip is None:
                 log.error("Could not find value for gatewayip environment variable. Please set gatewayip manually!")
                 sys.exit()
             else:

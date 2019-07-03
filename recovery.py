@@ -208,10 +208,12 @@ class Recover(object):
             ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         try:
-            wait = 10
+            wait = 5
             log.info("Waiting for {} seconds".format(wait))
             sleep(wait)
             client = telnetlib.Telnet('localhost', 4444)
+            #enable debugging if loading image is not working properly
+            #client.set_debuglevel(1)
             log.debug(client.read_until("> "))
             log.info("Halting CPU")
             client.write("soft_reset_halt\n")

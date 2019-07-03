@@ -126,12 +126,12 @@ class Recover(object):
 
         #if gatewayip_val is None:
         if gatewayip_val is None:
-            if gateway is None:
+            if gatewayip is None:
                 log.error("Could not find value for gatewayip environment variable. Please set gatewayip manually!")
                 sys.exit()
             else:
                 log.debug("Setting static gateway ip")
-	        cmd = "setenv gatewayip ".format(gatewayip)
+	        cmd = "setenv gatewayip {}".format(gatewayip)
                 port.write(cmd + "\n")
                 port.flush()
                 log.debug(port.read_until("U-Boot>"))

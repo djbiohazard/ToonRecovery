@@ -63,7 +63,7 @@ using `raspi_config` and reboot if necessary. Install the dependencies mentioned
 Then get and run this application:
 ```bash
 sudo apt install python-serial
-git clone https://github.com/IgorYbema/ToonRecovery.git
+git clone https://github.com/ToonSoftwareCollective/ToonRecovery.git
 cd ToonRecovery
 sudo python . --jtag-available
 ```

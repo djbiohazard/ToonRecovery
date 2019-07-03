@@ -131,7 +131,7 @@ class Recover(object):
                 sys.exit()
             else:
                 log.debug("Setting static gateway ip")
-	        cmd = "setenv gatewayip ".format(gatewayip)
+	        cmd = "setenv gatewayip {}".format(gatewayip)
                 port.write(cmd + "\n")
                 port.flush()
                 log.debug(port.read_until("U-Boot>"))

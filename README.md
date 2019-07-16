@@ -20,7 +20,7 @@ cd /srv/nfs
 curl -Nks "http://qutility.nl/toon-recovery-nfs-server-image.tar.gz" | tar zxvf -
 ```
 
-Then enable NFS on your server and enable NFSv2. This is needed for the Toon uboot which only supports NFSv2. Check how to enable NFS v2 in the manuals of your linux distro. Check if NFSv2 is enabled with
+Then enable NFS on your server and enable NFSv2. This is needed for the Toon uboot which only supports NFSv2. Check how to enable NFS v2 in the manuals of your linux distro. For a Raspberry Pi 3 the instructions are below. Check if NFSv2 is enabled with
 ```
 cat /proc/fs/nfsd/versions
 ```
@@ -28,6 +28,51 @@ cat /proc/fs/nfsd/versions
 Then enable the NFS export of the NFS directory with this in the /etc/exports file. Don't forget that you need to reload the exports if you change it.
 ```
 /srv/nfs *(rw,no_subtree_check,async,no_root_squash)
+```
+
+## Raspberry Pi 3 with NFS v2
+Complete instructions for a Raspberry Pi 3 are below. Thanks for jozg for this.
+
+```
+sudo apt-get install nfs-kernel-server portmap nfs-common
+sudo nano /etc/exports
+```
+Add the NFS export to this file
+```
+/srv/nfs *(rw,no_subtree_check,async,no_root_squash)
+```
+
+To enable NFS v2:
+```
+sudo nano  /etc/default/nfs-kernel-server
+```
+Change:
+```
+RPCNFSDCOUNT=8
+```
+to:
+```
+RPCNFSDCOUNT="-V 2 8"
+```
+And change:
+```
+RPCMOUNTDOPTS="--manage-gids"
+```
+to:
+```
+RPCMOUNTDOPTS="-V 2 --manage-gids"
+```
+
+Then create the NFS recovery environment.
+```
+mkdir -p /srv/nfs
+cd /srv/nfs
+curl -Nks "http://qutility.nl/toon-recovery-nfs-server-image.tar.gz" | tar zxvf -
+```
+
+Finally restart the NFS kernel server to allow all changes to be affective.
+```
+sudo service nfs-kernel-server restart
 ```
 
 ## How to use it?

@@ -15,9 +15,9 @@ At the moment, the following is implemented:
 The recovery will be loaded over NFS from the server which you provide (using option --serverip). You must download the NFS server image and unpack the tar.gz file into /srv/nfs. The image file is stored in github using LFS. However LFS (in a free plan) has limited bandwith available and blocks if too many bandwith is already used this month. So, you can also download it from the qutility.nl webserver. Just run this command to download and unpack the recovery image to your NFS directory:
 
 ```
-mkdir -p /srv/nfs
+sudo mkdir -p /srv/nfs
 cd /srv/nfs
-curl -Nks "http://qutility.nl/toon-recovery-nfs-server-image.tar.gz" | tar zxvf -
+sudo curl -Nks "http://qutility.nl/toon-recovery-nfs-server-image.tar.gz" | tar zxvf -
 ```
 
 Then enable NFS on your server and enable NFSv2. This is needed for the Toon uboot which only supports NFSv2. Check how to enable NFS v2 in the manuals of your linux distro. For a Raspberry Pi 3 the instructions are below. Check if NFSv2 is enabled with

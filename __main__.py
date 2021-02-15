@@ -104,7 +104,10 @@ def find_rpi_version():
             "a020a0":   "rpi3",
             "a22082":   "rpi3",
             "a32082":   "rpi3",
-            "a020d3":   "rpi3"
+            "a020d3":   "rpi3",
+	    "a03111":   "rpi4",
+            "b03111":   "rpi4",
+            "c03111":   "rpi4",
         }[revision]
     except:
         pass

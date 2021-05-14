@@ -112,7 +112,7 @@ Als you need to connect the Toon to your network using the builtin UTP/LAN/ether
 Then reset your Toon and let the magic happen :) After it is finished you must connect to your toon over serial and you will see that your Toon is booted into the recovery console. The root password from recovery is set to 'toon'. You will probably want to change that aftwerwards.
 
 ## Recovery
-When the Toon is booted into the recovery environment start your favourite serial terminal emulator. You will presented a menu like this one.
+When the Toon is booted into the recovery environment start your favourite serial terminal console client. You will presented a menu like this one.
 
 ```
 Welcome to the Toon recovery environment.

@@ -61,6 +61,16 @@ echo "Press any key to continue..."
 read -n 1 -s
 set -e
 
+# Check if resuming after reboot
+if [ -f /root/.toonrecovery_continue_after_reboot ]; then
+    echo "Resuming ToonRecovery installation after reboot..."
+    rm /root/.toonrecovery_continue_after_reboot
+    CONTINUE_AFTER_REBOOT=true
+else
+    CONTINUE_AFTER_REBOOT=false
+fi
+
+if [ "$CONTINUE_AFTER_REBOOT" = false ]; then
 # Check for required tools
 REQUIRED_TOOLS=("curl" "git" "tar" "make" "python")
 for tool in "${REQUIRED_TOOLS[@]}"; do
@@ -95,6 +105,16 @@ fi
 # Stop and disable serial-getty service to prevent conflicts
 systemctl stop serial-getty@serial0.service || true
 systemctl disable serial-getty@serial0.service || true
+fi
+
+if [ "$CONTINUE_AFTER_REBOOT" = false ]; then
+    echo "Installation requires a reboot for the serial port settings to take effect."
+    echo "This is required for the script to work."
+    touch /root/.toonrecovery_continue_after_reboot
+    sleep 5
+    reboot
+    exit 0
+fi
 
 # Configure NFS server settings
 NFS_EXPORT_DIR="/srv/nfs"
@@ -249,8 +269,12 @@ echo "Skip U-Boot Check: $DONT_CHECK_UBOOT"
 echo "Boot Only: $BOOT_ONLY"
 echo ""
 
-# Run the Python script with the chosen arguments
-sudo python . --serial-port "$SERIAL_PORT" --output-level "$OUTPUT_LEVEL" --gatewayip "$GATEWAY_IP" --serverip "$SERVER_IP" $JTAG_AVAILABLE --jtag-hardware "$JTAG_HARDWARE" $DONT_CHECK_UBOOT $BOOT_ONLY
+# Run the Python script with the chosen arguments. Abort the script if it fails.
+if ! sudo python your_script.py --serial-port "$SERIAL_PORT" --output-level "$OUTPUT_LEVEL" --gatewayip "$GATEWAY_IP" --serverip "$SERVER_IP" $JTAG_AVAILABLE --jtag-hardware "$JTAG_HARDWARE" $DONT_CHECK_UBOOT $BOOT_ONLY; then
+    echo "❌ ToonRecovery script failed. Aborting."
+    exit 1
+fi
+
 
 # After installation, ask if they want to connect via minicom
 echo ""

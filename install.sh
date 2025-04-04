@@ -61,6 +61,17 @@ echo "Press any key to continue..."
 read -n 1 -s
 set -e
 
+# Give people the chance to resume running the script without having to recompile everything.
+MODE="install"
+
+for arg in "$@"; do
+    case $arg in
+        --toonrecovery)
+            MODE="toonrecovery"
+            shift
+            ;;
+    esac
+done
 # Check if resuming after reboot
 if [ -f /root/.toonrecovery_continue_after_reboot ]; then
     echo "Resuming ToonRecovery installation after reboot..."
@@ -107,6 +118,16 @@ systemctl stop serial-getty@serial0.service || true
 systemctl disable serial-getty@serial0.service || true
 fi
 
+echo "⚠️ Installation requires a reboot for the serial port settings to take effect."
+echo "Rebooting in 5 seconds..."
+sleep 5
+
+# One-time launch after reboot
+sed -i '/install.sh --toonrecovery/d' /etc/rc.local
+sed -i '/^exit 0/i bash /home/toon/install.sh --toonrecovery' /etc/rc.local
+
+reboot
+
 if [ "$CONTINUE_AFTER_REBOOT" = false ]; then
     echo "Installation requires a reboot for the serial port settings to take effect."
     echo "This is required for the script to work."
@@ -152,7 +173,9 @@ if ! systemctl is-active --quiet nfs-kernel-server; then
     exit 1
 fi
 
-# Build and install JimTCL (required for OpenOCD)
+# Check if JimTCL is already installed
+if ! command -v jimsh &> /dev/null; then
+# Build and install JimTCL (required for OpenOCD) because it's not found.
 echo "Building and installing JimTCL..."
 cd /opt
 rm -rf jimtcl
@@ -161,7 +184,11 @@ cd jimtcl
 ./configure
 make -j4
 sudo make install
-
+else
+    echo "JimTCL is already installed, skipping build."
+fi
+# Check if OpenOCD is already installed
+if ! command -v openocd &> /dev/null; then
 # Build and install OpenOCD
 echo "Building and installing OpenOCD..."
 cd /opt
@@ -175,6 +202,9 @@ cd openocd
 ./configure --enable-sysfsgpio --enable-bcm2835gpio --prefix=/usr
 make -j$(nproc)
 make install
+else
+    echo "OpenOCD is already installed, skipping build."
+fi
 
 # Download and set up ToonRecovery
 echo "Downloading ToonRecovery..."

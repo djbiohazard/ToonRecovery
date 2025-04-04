@@ -16,9 +16,13 @@ At the moment, the following is implemented:
 
 ## Prerequisites
 Raspberry Pi Zero 2W (with a header installed, this is not optional!)
+
 2021-05-07-raspios-buster-armhf.img (https://archive.org/details/2021-05-07-raspios-buster-armhf)
+
 Raspberry Pi Imager (https://www.raspberrypi.com/software/)
+
 Windows PC (Windows 10 or higher) with Putty installed.
+
 Micro USB data cable.
 
 ## Setting up the Pi

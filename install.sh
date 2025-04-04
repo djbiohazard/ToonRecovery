@@ -56,7 +56,7 @@ echo "
                                                                                                     
 "
 echo "ToonRecovery installer by DjBiohazard (Eric van den Hurck)"
-echo "Based (and contains) on scripts by IgorYbema, TheHogNL, MarcelR."
+echo "Based (and contains) on scripts by Marten Jacobs, IgorYbema, TheHogNL, MarcelR."
 echo "Press any key to continue..."
 read -n 1 -s
 set -e
